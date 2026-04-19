@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
@@ -10,7 +10,8 @@ const fadeUp = {
   },
 };
 
-const stagger = {
+const stagger: Variants = {
+  hidden: {},
   visible: { transition: { staggerChildren: 0.09 } },
 };
 
@@ -95,7 +96,6 @@ export default function App() {
   return (
     <>
       <header className="header">
-        {/* Name with blinking cursor */}
         <span className="header-name">
           Kolade Oyewumi
           <motion.span
@@ -112,7 +112,6 @@ export default function App() {
           <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
 
-          {/* Creative dark mode toggle — icon morphs with rotate+fade */}
           <button
             className="theme-toggle"
             onClick={() => setDark((d) => !d)}
@@ -135,7 +134,6 @@ export default function App() {
       </header>
 
       <main className="main">
-        {/* Hero */}
         <motion.div
           className="hero"
           initial="hidden"
@@ -153,7 +151,6 @@ export default function App() {
           </p>
         </motion.div>
 
-        {/* Experience */}
         <motion.section
           className="section"
           initial="hidden"
@@ -185,7 +182,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* About */}
         <motion.section
           className="section"
           initial="hidden"
@@ -211,7 +207,6 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        {/* Connect */}
         <motion.section
           className="section"
           initial="hidden"

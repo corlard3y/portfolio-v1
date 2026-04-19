@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 const fadeUp: Variants = {
@@ -60,6 +60,66 @@ const skills = [
   'Docker',
   'CI/CD',
 ];
+
+const quotes = [
+  "The best error message is the one that never shows up.",
+  "Simplicity is the ultimate sophistication.",
+  "Code is read more often than it is written.",
+  "First, solve the problem. Then, write the code.",
+  "Make it work, make it right, make it fast.",
+  "Every great developer you know got there by solving problems they were unqualified to solve.",
+  "The function of good software is to make the complex appear simple.",
+  "It's not a bug — it's an undocumented feature.",
+  "Stay curious. Break things. Learn fast.",
+  "Good design is as little design as possible.",
+  "Ships that don't sail serve no one.",
+  "Done is better than perfect, but perfect ships.",
+];
+
+function RotatingQuote() {
+  const [index, setIndex] = useState(() => Math.floor(Math.random() * quotes.length));
+  const [visible, setVisible] = useState(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const schedule = () => {
+      const delay = 5000 + Math.random() * 5000;
+      timerRef.current = setTimeout(() => {
+        setVisible(false);
+        setTimeout(() => {
+          setIndex((i) => {
+            let next = i;
+            while (next === i) next = Math.floor(Math.random() * quotes.length);
+            return next;
+          });
+          setVisible(true);
+          schedule();
+        }, 600);
+      }, delay);
+    };
+    schedule();
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, []);
+
+  return (
+    <div className="quote-wrap">
+      <AnimatePresence mode="wait">
+        {visible && (
+          <motion.p
+            key={index}
+            className="quote-text"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          >
+            "{quotes[index]}"
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 const MoonIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -206,6 +266,8 @@ export default function App() {
             ))}
           </motion.div>
         </motion.section>
+
+        <RotatingQuote />
 
         <motion.section
           className="section"

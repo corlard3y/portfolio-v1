@@ -269,6 +269,22 @@ a {
   border-color: var(--text);
 }
 
+/* ── Rotating quote ── */
+.quote-wrap {
+  min-height: 3rem;
+  margin-bottom: 5.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.quote-text {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
 /* ── Connect ── */
 .connect-email {
   color: var(--text);

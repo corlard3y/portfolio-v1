@@ -32,15 +32,16 @@ export const work = [
 ];
 
 export const skills = [
-  'TypeScript',
-  'React',
+  'Javascript/TypeScript',
+  'React.js',
   'Next.js',
   'Node.js',
   'Web3 / Ethers.js',
+  'CSS/SASS/SCSS',
   'TailwindCSS',
-  'AWS',
-  'PostgreSQL',
-  'Docker',
+  'Styled-Components',
+  'Ant design',
+  'TanStack Query',
   'CI/CD',
 ];
 

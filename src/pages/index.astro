@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ScrambleDecode } from '../components/ScrambleDecode';
+import { ThemeToggle } from '../components/ThemeToggle';
+import { work, skills } from '../data';
+import '../index.css';
+import '../styles/index.css';
+---
+
+<Layout>
+  <header class="header">
+    <span class="header-name">
+      Kolade Oyewumi<span class="cursor">_</span>
+    </span>
+
+    <nav class="header-nav">
+      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
+      <ThemeToggle client:load />
+    </nav>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <h1 class="hero-title">
+        Frontend Engineer,<br />based in Nigeria.
+      </h1>
+      <p class="hero-desc">
+        5+ years building products with React, Next.js & Web3. Currently at
+        Push Chain — shipping for 100K+ daily active users.
+      </p>
+    </div>
+
+    <section class="section">
+      <p class="section-label">Experience</p>
+      <div class="project-list">
+        {work.map((w) => (
+          <a
+            href={w.url}
+            target={w.url !== '#' ? '_blank' : undefined}
+            rel="noopener noreferrer"
+            class="project-item"
+          >
+            <div class="project-left">
+              <span class="project-name">{w.company}</span>
+              <span class="project-desc">{w.role}</span>
+            </div>
+            <div class="project-right">
+              <span>{w.period}</span>
+              {w.url !== '#' && <span class="project-arrow">→</span>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="section-label">About</p>
+      <p class="about-text">
+        Frontend engineer specializing in React, Next.js, and Web3. I've
+        architected reward systems, design systems, and developer-facing
+        tools — working across decentralized protocols, healthcare, and
+        enterprise HR platforms.
+      </p>
+      <p class="about-text">
+        I care about performance, accessibility, and shipping things that
+        hold up at scale.
+      </p>
+      <div class="skills">
+        {skills.map((s) => <span class="skill-tag">{s}</span>)}
+      </div>
+    </section>
+
+    <ScrambleDecode client:visible />
+
+    <section class="section">
+      <p class="section-label">Connect</p>
+      <p class="about-text">
+        Reach me at{' '}
+        <a href="mailto:oyewumi.koladej@gmail.com" class="connect-email">
+          oyewumi.koladej@gmail.com
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2026 Kolade Oyewumi</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
+    </div>
+  </footer>
+</Layout>

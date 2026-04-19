@@ -32,19 +32,19 @@ const work = [
     company: 'Mobicure',
     role: 'Full-Stack Engineer',
     period: '2021–2022',
-    url: '#',
+    url: 'https://mobicure.biz/',
   },
   {
     company: 'Datazen',
     role: 'Frontend Engineer',
     period: '2021',
-    url: '#',
+    url: 'https://datazensolutions.com/',
   },
   {
     company: 'Bowen University Digital Services',
     role: 'Software Developer Intern',
     period: '2020',
-    url: '#',
+    url: 'https://bowen.edu.ng/',
   },
 ];
 

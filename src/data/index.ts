@@ -38,10 +38,14 @@ export const skills = [
   'Node.js',
   'Web3 / Ethers.js',
   'CSS/SASS/SCSS',
+  'Redux/Zustand',
+  'Git/GitHub',
+  'REST APIs',
   'TailwindCSS',
   'Styled-Components',
   'Ant design',
   'TanStack Query',
+  'SEO/Performance optimization',
   'CI/CD',
 ];
 

@@ -220,16 +220,12 @@ export default function App() {
           variants={stagger}
         >
           <motion.p className="section-label" variants={fadeUp}>Connect</motion.p>
-          <motion.div className="connect-line" variants={fadeUp} />
           <motion.p className="about-text" variants={fadeUp}>
-            Open to new opportunities, collaborations, or just a good conversation.
-          </motion.p>
-          <motion.div variants={fadeUp} style={{ marginTop: '1.25rem' }}>
+            Reach me at{' '}
             <a href="mailto:oyewumi.koladej@gmail.com" className="connect-email">
               oyewumi.koladej@gmail.com
-              <span className="connect-arrow">↗</span>
             </a>
-          </motion.div>
+          </motion.p>
         </motion.section>
       </main>
 

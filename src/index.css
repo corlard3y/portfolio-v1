@@ -193,6 +193,7 @@ a {
   color: var(--text);
   transition: border-color 0.2s ease;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .project-item:first-child {

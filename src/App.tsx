@@ -1,178 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.09 } },
-};
-
-const work = [
-  {
-    company: 'Push Chain',
-    role: 'Frontend Engineer',
-    period: '2022–Present',
-    url: 'https://push.org',
-  },
-  {
-    company: 'Ojindo',
-    role: 'Full-Stack Engineer',
-    period: '2025–Present',
-    url: '#',
-  },
-  {
-    company: 'Mobicure',
-    role: 'Full-Stack Engineer',
-    period: '2021–2022',
-    url: 'https://mobicure.biz/',
-  },
-  {
-    company: 'Datazen',
-    role: 'Frontend Engineer',
-    period: '2021',
-    url: 'https://datazensolutions.com/',
-  },
-  {
-    company: 'Bowen University Digital Services',
-    role: 'Software Developer Intern',
-    period: '2020',
-    url: 'https://bowen.edu.ng/',
-  },
-];
-
-const skills = [
-  'TypeScript',
-  'React',
-  'Next.js',
-  'Node.js',
-  'Web3 / Ethers.js',
-  'TailwindCSS',
-  'AWS',
-  'PostgreSQL',
-  'Docker',
-  'CI/CD',
-];
-
-const quotes = [
-  "The best error message is the one that never shows up.",
-  "Simplicity is the ultimate sophistication.",
-  "Code is read more often than it is written.",
-  "First, solve the problem. Then, write the code.",
-  "Make it work, make it right, make it fast.",
-  "Every great developer you know got there by solving problems they were unqualified to solve.",
-  "The function of good software is to make the complex appear simple.",
-  "It's not a bug — it's an undocumented feature.",
-  "Stay curious. Break things. Learn fast.",
-  "Good design is as little design as possible.",
-  "Ships that don't sail serve no one.",
-  "Done is better than perfect, but perfect ships.",
-];
-
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!<>-_\\/[]{}=+*^?#@$';
-
-const scramble = (target: string, locked: number) =>
-  target
-    .split('')
-    .map((ch, i) =>
-      ch === ' ' ? ' ' : i < locked ? ch : CHARS[Math.floor(Math.random() * CHARS.length)]
-    )
-    .join('');
-
-function ScrambleDecode() {
-  const [index, setIndex] = useState(() => Math.floor(Math.random() * quotes.length));
-  const [displayed, setDisplayed] = useState(() => scramble(quotes[0], 0));
-  const [fading, setFading] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const holdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const target = quotes[index];
-    const FRAME_MS = 45;
-    const TOTAL_FRAMES = 40;
-    let frame = 0;
-    setFading(false);
-    setDisplayed(scramble(target, 0));
-
-    intervalRef.current = setInterval(() => {
-      frame++;
-      const locked = Math.floor((frame / TOTAL_FRAMES) * target.length);
-      setDisplayed(scramble(target, locked));
-
-      if (frame >= TOTAL_FRAMES) {
-        clearInterval(intervalRef.current!);
-        setDisplayed(target);
-
-        const hold = 5000 + Math.random() * 5000;
-        holdRef.current = setTimeout(() => {
-          setFading(true);
-          setTimeout(() => {
-            setIndex((i) => {
-              let next = i;
-              while (next === i) next = Math.floor(Math.random() * quotes.length);
-              return next;
-            });
-          }, 500);
-        }, hold);
-      }
-    }, FRAME_MS);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      if (holdRef.current) clearTimeout(holdRef.current);
-    };
-  }, [index]);
-
-  return (
-    <div className="quote-wrap">
-      <motion.p
-        className="quote-text"
-        animate={{ opacity: fading ? 0 : 1 }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
-      >
-        &ldquo;{displayed}&rdquo;
-      </motion.p>
-    </div>
-  );
-}
-
-const MoonIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-  </svg>
-);
-
-const SunIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5" />
-    <line x1="12" y1="1" x2="12" y2="3" />
-    <line x1="12" y1="21" x2="12" y2="23" />
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-    <line x1="1" y1="12" x2="3" y2="12" />
-    <line x1="21" y1="12" x2="23" y2="12" />
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-  </svg>
-);
+import { fadeUp, stagger } from './animations';
+import { work, skills } from './data';
+import { useTheme } from './hooks/useTheme';
+import { ScrambleDecode } from './components/ScrambleDecode';
+import { MoonIcon, SunIcon } from './components/Icons';
 
 export default function App() {
-  const [dark, setDark] = useState(() => {
-    const stored = localStorage.getItem('theme');
-    return stored === 'dark';
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  }, [dark]);
+  const { dark, toggle } = useTheme();
 
   return (
     <>
@@ -193,11 +28,7 @@ export default function App() {
           <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
 
-          <button
-            className="theme-toggle"
-            onClick={() => setDark((d) => !d)}
-            aria-label="Toggle dark mode"
-          >
+          <button className="theme-toggle" onClick={toggle} aria-label="Toggle dark mode">
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={dark ? 'sun' : 'moon'}
@@ -215,12 +46,7 @@ export default function App() {
       </header>
 
       <main className="main">
-        <motion.div
-          className="hero"
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-        >
+        <motion.div className="hero" initial="hidden" animate="visible" variants={fadeUp}>
           <h1 className="hero-title">
             Frontend Engineer,
             <br />

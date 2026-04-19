@@ -6,12 +6,6 @@ export const work = [
     url: 'https://push.org',
   },
   {
-    company: 'Ojindo',
-    role: 'Full-Stack Engineer',
-    period: '2025–Present',
-    url: '#',
-  },
-  {
     company: 'Mobicure',
     role: 'Full-Stack Engineer',
     period: '2021–2022',

@@ -76,47 +76,69 @@ const quotes = [
   "Done is better than perfect, but perfect ships.",
 ];
 
-function RotatingQuote() {
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!<>-_\\/[]{}=+*^?#@$';
+
+const scramble = (target: string, locked: number) =>
+  target
+    .split('')
+    .map((ch, i) =>
+      ch === ' ' ? ' ' : i < locked ? ch : CHARS[Math.floor(Math.random() * CHARS.length)]
+    )
+    .join('');
+
+function ScrambleDecode() {
   const [index, setIndex] = useState(() => Math.floor(Math.random() * quotes.length));
-  const [visible, setVisible] = useState(true);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [displayed, setDisplayed] = useState(() => scramble(quotes[0], 0));
+  const [fading, setFading] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const holdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const schedule = () => {
-      const delay = 5000 + Math.random() * 5000;
-      timerRef.current = setTimeout(() => {
-        setVisible(false);
-        setTimeout(() => {
-          setIndex((i) => {
-            let next = i;
-            while (next === i) next = Math.floor(Math.random() * quotes.length);
-            return next;
-          });
-          setVisible(true);
-          schedule();
-        }, 600);
-      }, delay);
+    const target = quotes[index];
+    const FRAME_MS = 45;
+    const TOTAL_FRAMES = 40;
+    let frame = 0;
+    setFading(false);
+    setDisplayed(scramble(target, 0));
+
+    intervalRef.current = setInterval(() => {
+      frame++;
+      const locked = Math.floor((frame / TOTAL_FRAMES) * target.length);
+      setDisplayed(scramble(target, locked));
+
+      if (frame >= TOTAL_FRAMES) {
+        clearInterval(intervalRef.current!);
+        setDisplayed(target);
+
+        const hold = 5000 + Math.random() * 5000;
+        holdRef.current = setTimeout(() => {
+          setFading(true);
+          setTimeout(() => {
+            setIndex((i) => {
+              let next = i;
+              while (next === i) next = Math.floor(Math.random() * quotes.length);
+              return next;
+            });
+          }, 500);
+        }, hold);
+      }
+    }, FRAME_MS);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (holdRef.current) clearTimeout(holdRef.current);
     };
-    schedule();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, []);
+  }, [index]);
 
   return (
     <div className="quote-wrap">
-      <AnimatePresence mode="wait">
-        {visible && (
-          <motion.p
-            key={index}
-            className="quote-text"
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          >
-            "{quotes[index]}"
-          </motion.p>
-        )}
-      </AnimatePresence>
+      <motion.p
+        className="quote-text"
+        animate={{ opacity: fading ? 0 : 1 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      >
+        &ldquo;{displayed}&rdquo;
+      </motion.p>
     </div>
   );
 }
@@ -144,8 +166,7 @@ const SunIcon = () => (
 export default function App() {
   const [dark, setDark] = useState(() => {
     const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return stored === 'dark';
   });
 
   useEffect(() => {
@@ -267,7 +288,7 @@ export default function App() {
           </motion.div>
         </motion.section>
 
-        <RotatingQuote />
+        <ScrambleDecode />
 
         <motion.section
           className="section"

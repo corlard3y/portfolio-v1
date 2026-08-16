@@ -191,7 +191,7 @@ import '../index.css';
       <span></span>
     </span>
     <span class="spotify-widget-copy">
-      <span class="sr-only" data-spotify-status>Now playing on Spotify</span>
+      <span data-spotify-status>I’m currently listening to</span>
       <span data-spotify-track></span>
       <span class="spotify-separator">—</span>
       <span data-spotify-artist></span>
@@ -252,7 +252,7 @@ import '../index.css';
         }
 
         spotifyCard.hidden = false;
-        spotifyStatus.textContent = 'Now playing on Spotify';
+        spotifyStatus.textContent = 'I’m currently listening to';
         spotifyTrack.textContent = data.title;
         spotifyArtist.textContent = data.artist;
         spotifyCard.setAttribute('href', data.url);

@@ -903,16 +903,22 @@ button:focus-visible {
   white-space: nowrap;
 }
 
+.spotify-widget-copy [data-spotify-status] {
+  flex: 0 0 auto;
+  color: rgba(17, 16, 14, 0.82);
+  font-size: 0.68rem;
+}
+
 .spotify-widget-copy [data-spotify-track] {
   flex: 0 1 auto;
-  max-width: 8.5rem;
+  max-width: 6.5rem;
   color: #11100e;
 }
 
 .spotify-separator,
 .spotify-widget-copy [data-spotify-artist] {
   flex: 0 1 auto;
-  max-width: 5.5rem;
+  max-width: 4.5rem;
   color: rgba(17, 16, 14, 0.76);
 }
 
@@ -1258,12 +1264,17 @@ button:focus-visible {
     font-size: 0.7rem;
   }
 
+  .spotify-widget-copy [data-spotify-status] {
+    max-width: 5.8rem;
+    font-size: 0.62rem;
+  }
+
   .spotify-widget-copy [data-spotify-track] {
-    max-width: 6.5rem;
+    max-width: 5rem;
   }
 
   .spotify-widget-copy [data-spotify-artist] {
-    max-width: 4rem;
+    max-width: 3.4rem;
   }
 
   .spotify-widget-action {

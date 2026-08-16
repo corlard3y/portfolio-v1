@@ -264,7 +264,7 @@ import '../index.css';
     }
 
     loadSpotifyTrack();
-    window.setInterval(loadSpotifyTrack, 20000);
+    window.setInterval(loadSpotifyTrack, 10000);
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) loadSpotifyTrack();

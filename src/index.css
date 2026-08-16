@@ -912,10 +912,11 @@ button:focus-visible {
   }
 
   .header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.65rem;
-    padding: 0.72rem 0.8rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem;
     overflow: hidden;
   }
 
@@ -925,15 +926,16 @@ button:focus-visible {
   }
 
   .header-nav {
-    width: 100%;
+    width: auto;
     min-width: 0;
-    padding: 0 0 0.12rem;
+    padding: 0;
     gap: 0.35rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: visible;
     flex-wrap: nowrap;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+  }
+
+  .header-nav a {
+    display: none;
   }
 
   .header-nav::-webkit-scrollbar {

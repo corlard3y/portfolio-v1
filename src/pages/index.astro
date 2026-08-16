@@ -176,23 +176,26 @@ import '../index.css';
     </section>
   </main>
 
+  <a
+    class="spotify-widget"
+    data-spotify-card
+    href="https://open.spotify.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-live="polite"
+    hidden
+  >
+    <img data-spotify-image alt="" loading="lazy" />
+    <span class="spotify-widget-copy">
+      <span data-spotify-status>Now playing</span>
+      <span data-spotify-track></span>
+      <span data-spotify-artist></span>
+      <span class="spotify-widget-action">Listen on Spotify ↗</span>
+    </span>
+  </a>
+
   <footer class="footer">
-    <div class="footer-left">
-      <span class="footer-copy">© 2026 Kolade Oyewumi</span>
-      <a
-        class="footer-spotify"
-        data-spotify-card
-        href="https://open.spotify.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-live="polite"
-        hidden
-      >
-        <span data-spotify-status>Now playing</span>
-        <span data-spotify-track></span>
-        <span data-spotify-artist></span>
-      </a>
-    </div>
+    <span class="footer-copy">© 2026 Kolade Oyewumi</span>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -226,6 +229,7 @@ import '../index.css';
     const spotifyStatus = document.querySelector('[data-spotify-status]');
     const spotifyTrack = document.querySelector('[data-spotify-track]');
     const spotifyArtist = document.querySelector('[data-spotify-artist]');
+    const spotifyImage = document.querySelector('[data-spotify-image]');
 
     async function loadSpotifyTrack() {
       if (!spotifyCard || !spotifyStatus || !spotifyTrack || !spotifyArtist) return;
@@ -246,8 +250,13 @@ import '../index.css';
         spotifyCard.hidden = false;
         spotifyStatus.textContent = 'Listening now';
         spotifyTrack.textContent = data.title;
-        spotifyArtist.textContent = `— ${data.artist}`;
+        spotifyArtist.textContent = data.artist;
         spotifyCard.setAttribute('href', data.url);
+
+        if (spotifyImage && data.image) {
+          spotifyImage.src = data.image;
+          spotifyImage.alt = `${data.title} album artwork`;
+        }
       } catch {
         spotifyCard.hidden = true;
         spotifyCard.removeAttribute('href');
@@ -255,5 +264,10 @@ import '../index.css';
     }
 
     loadSpotifyTrack();
+    window.setInterval(loadSpotifyTrack, 20000);
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) loadSpotifyTrack();
+    });
   </script>
 </Layout>

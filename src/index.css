@@ -831,7 +831,8 @@ button:focus-visible {
   bottom: 1rem;
   z-index: 25;
   width: min(23rem, calc(100vw - 2rem));
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.35rem minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.55rem;
   padding: 0.5rem 0.65rem;
@@ -886,44 +887,49 @@ button:focus-visible {
 }
 
 .spotify-widget-copy {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.28rem;
-  flex: 1 1 auto;
+  display: grid;
+  gap: 0.16rem;
   min-width: 0;
   font-size: 0.78rem;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
 }
 
-.spotify-widget-copy span {
+.spotify-widget-copy span,
+.spotify-widget-meta {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.spotify-widget-copy [data-spotify-status] {
-  flex: 0 0 auto;
+.spotify-widget-status {
   color: rgba(17, 16, 14, 0.82);
   font-size: 0.68rem;
 }
 
+.spotify-widget-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.24rem;
+}
+
 .spotify-widget-copy [data-spotify-track] {
   flex: 0 1 auto;
-  max-width: 6.5rem;
+  max-width: 10.5rem;
   color: #11100e;
 }
 
 .spotify-separator,
 .spotify-widget-copy [data-spotify-artist] {
   flex: 0 1 auto;
-  max-width: 4.5rem;
+  max-width: 6.5rem;
   color: rgba(17, 16, 14, 0.76);
 }
 
 .spotify-widget-action {
   flex: 0 0 auto;
+  align-self: end;
   color: #11100e;
   font-size: 0.72rem;
   font-weight: 700;
@@ -1225,6 +1231,7 @@ button:focus-visible {
     right: 0.8rem;
     bottom: 0.8rem;
     width: min(21rem, calc(100vw - 1.6rem));
+    grid-template-columns: 1.2rem minmax(0, 1fr) auto;
     gap: 0.45rem;
     padding: 0.45rem 0.55rem;
     box-shadow: 3px 3px 0 var(--border);
@@ -1264,17 +1271,16 @@ button:focus-visible {
     font-size: 0.7rem;
   }
 
-  .spotify-widget-copy [data-spotify-status] {
-    max-width: 5.8rem;
+  .spotify-widget-status {
     font-size: 0.62rem;
   }
 
   .spotify-widget-copy [data-spotify-track] {
-    max-width: 5rem;
+    max-width: 8rem;
   }
 
   .spotify-widget-copy [data-spotify-artist] {
-    max-width: 3.4rem;
+    max-width: 4.5rem;
   }
 
   .spotify-widget-action {

@@ -185,13 +185,18 @@ import '../index.css';
     aria-live="polite"
     hidden
   >
-    <img data-spotify-image alt="" loading="lazy" />
-    <span class="spotify-widget-copy">
-      <span data-spotify-status>Now playing</span>
-      <span data-spotify-track></span>
-      <span data-spotify-artist></span>
-      <span class="spotify-widget-action">Listen on Spotify ↗</span>
+    <span class="spotify-logo" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
     </span>
+    <span class="spotify-widget-copy">
+      <span class="sr-only" data-spotify-status>Now playing on Spotify</span>
+      <span data-spotify-track></span>
+      <span class="spotify-separator">—</span>
+      <span data-spotify-artist></span>
+    </span>
+    <span class="spotify-widget-action">listen here</span>
   </a>
 
   <footer class="footer">
@@ -229,7 +234,6 @@ import '../index.css';
     const spotifyStatus = document.querySelector('[data-spotify-status]');
     const spotifyTrack = document.querySelector('[data-spotify-track]');
     const spotifyArtist = document.querySelector('[data-spotify-artist]');
-    const spotifyImage = document.querySelector('[data-spotify-image]');
 
     async function loadSpotifyTrack() {
       if (!spotifyCard || !spotifyStatus || !spotifyTrack || !spotifyArtist) return;
@@ -248,15 +252,10 @@ import '../index.css';
         }
 
         spotifyCard.hidden = false;
-        spotifyStatus.textContent = 'Listening now';
+        spotifyStatus.textContent = 'Now playing on Spotify';
         spotifyTrack.textContent = data.title;
         spotifyArtist.textContent = data.artist;
         spotifyCard.setAttribute('href', data.url);
-
-        if (spotifyImage && data.image) {
-          spotifyImage.src = data.image;
-          spotifyImage.alt = `${data.title} album artwork`;
-        }
       } catch {
         spotifyCard.hidden = true;
         spotifyCard.removeAttribute('href');

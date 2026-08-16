@@ -2,6 +2,9 @@
   command = "yarn build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+
 # HTML — revalidate every request
 [[headers]]
   for = "/*.html"

@@ -15,14 +15,16 @@ const {
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f9f9f7" />
+    <meta name="theme-color" content="#11100e" />
     <meta name="description" content={description} />
     <link rel="preload" href="/fonts/Satoshi-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="preload" href="/fonts/Satoshi-Medium.otf" as="font" type="font/otf" crossorigin />
     <title>{title}</title>
     <!-- Set theme before paint to avoid flash -->
     <script is:inline>
-      const t = localStorage.getItem('theme') || 'light';
+      const savedTheme = localStorage.getItem('theme');
+      const t = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+      if (!savedTheme) localStorage.setItem('theme', 'dark');
       document.documentElement.setAttribute('data-theme', t);
     </script>
   </head>

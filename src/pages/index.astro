@@ -3,10 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { ScrambleDecode } from '../components/ScrambleDecode';
 import { ThemeToggle } from '../components/ThemeToggle';
 import {
-  additionalProjects,
-  capabilities,
   featuredProjects,
-  skills,
+  skillGroups,
   work,
 } from '../data';
 import '../styles/index.css';
@@ -17,18 +15,27 @@ import '../index.css';
   <div class="site-noise" aria-hidden="true"></div>
   <div class="ticker" aria-label="Current focus">
     <div class="ticker-track">
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
-      <span>Available for work</span>
+      <div class="ticker-group">
+        <span>Available for work</span>
+        <span>Frontend Engineer</span>
+        <span>Based in Nigeria</span>
+        <span>Open to remote teams</span>
+        <span>Product Engineer</span>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <span>Available for work</span>
+        <span>Frontend Engineer</span>
+        <span>Based in Nigeria</span>
+        <span>Open to remote teams</span>
+        <span>Product Engineer</span>
+      </div>
+      <div class="ticker-group" aria-hidden="true">
+        <span>Available for work</span>
+        <span>Frontend Engineer</span>
+        <span>Based in Nigeria</span>
+        <span>Open to remote teams</span>
+        <span>Product Engineer</span>
+      </div>
     </div>
   </div>
 
@@ -38,42 +45,67 @@ import '../index.css';
     </span>
 
     <nav class="header-nav">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
+      <a href="#experience" class="mobile-hidden">Experience</a>
+      <a href="#projects" class="mobile-hidden">Projects</a>
       <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
+      <a href="mailto:oyewumi.koladej@gmail.com" class="mobile-hidden">Email</a>
       <ThemeToggle client:load />
     </nav>
   </header>
 
   <main class="main">
     <section class="hero" aria-labelledby="intro-title">
-      <p class="hero-kicker">Frontend engineer · Nigeria · shipping globally</p>
+      <p class="hero-kicker">Frontend engineer · shipping globally · Nigeria</p>
       <h1 id="intro-title" class="hero-title">
-        I build interfaces for products that move messages, money, and users.
+        I build interfaces for platforms, products, and teams shipping real software.
       </h1>
       <div class="hero-grid">
         <p class="hero-desc">
-          7+ years building production React, Next.js and Web3 products across
-          wallet-native communication, developer platforms, digital health,
-          HR systems, logistics and commercial websites.
+          Frontend engineer building production interfaces across Web3,
+          developer platforms, health-tech, business operations software, and
+          commercial websites.
         </p>
         <div class="hero-proof" aria-label="Selected highlights">
           <span>7+ years experience</span>
           <span>10+ products shipped</span>
-          <!-- <span>5+ live public apps</span> -->
-          <!-- <span>4 product domains</span> -->
+          <span>5+ live public apps</span>
+          <span>4 product domains</span>
         </div>
       </div>
     </section>
 
+    <section id="experience" class="section">
+      <p class="section-label reveal">Experience</p>
+      <div class="experience-list">
+        {work.map((w, index) => (
+          <a
+            href={w.url}
+            target={w.url !== '#' ? '_blank' : undefined}
+            rel="noopener noreferrer"
+            class="experience-row reveal"
+            style={`--reveal-delay: ${index * 55}ms`}
+          >
+            <div>
+              <p class="experience-company">{w.company}</p>
+              <p class="experience-role">{w.role}</p>
+            </div>
+            <div class="experience-meta">
+              <span>{w.eyebrow}</span>
+              <span>{w.period}</span>
+            </div>
+            {w.url !== '#' && <span class="experience-arrow">→</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+
     <section id="projects" class="section projects-section">
-      <p class="section-label">Featured projects</p>
+      <p class="section-label reveal">Featured projects</p>
 
       <div class="project-grid">
         {featuredProjects.map((project, index) => (
-          <article class="project-card">
+          <article class="project-card reveal" style={`--reveal-delay: ${index * 70}ms`}>
             <div class="project-card-top">
               <span class="card-index">0{index + 1}</span>
               <span class="project-status">{project.status}</span>
@@ -87,10 +119,6 @@ import '../index.css';
               <div>
                 <span>Role</span>
                 <p>{project.role}</p>
-              </div>
-              <div>
-                <span>Period</span>
-                <p>{project.period}</p>
               </div>
             </div>
             <div class="project-stack">
@@ -108,89 +136,34 @@ import '../index.css';
       </div>
     </section>
 
-    <section class="section additional-section">
-      <p class="section-label">Additional selected work</p>
-
-      <div class="additional-grid">
-        {additionalProjects.map((project) => (
-          <article class="additional-card">
-            <p class="project-category">{project.category}</p>
-            <h2>{project.name}</h2>
-            <p class="project-summary">{project.summary}</p>
-            <p class="work-role">{project.role}</p>
-            <div class="project-stack compact-stack">
-              {project.stack.map((item) => <span>{item}</span>)}
-            </div>
-            <div class="project-links">
-              {project.links.map((link) => (
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.label} ↗
-                </a>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
     <!-- Capabilities section hidden for now; keep data/styles available for later review. -->
 
-    <section id="experience" class="section">
-      <p class="section-label">Experience</p>
-      <div class="work-list">
-        {work.map((w) => (
-          <a
-            href={w.url}
-            target={w.url !== '#' ? '_blank' : undefined}
-            rel="noopener noreferrer"
-            class="work-card"
-          >
-            <div class="work-meta">
-              <span>{w.eyebrow}</span>
-              <span>{w.period}</span>
-            </div>
-            <div class="work-main">
-              <div>
-                <h2>{w.company}</h2>
-                <p class="work-role">{w.role}</p>
-              </div>
-              {w.url !== '#' && <span class="work-arrow">↗</span>}
-            </div>
-            <span class="experience-link">View company ↗</span>
-          </a>
-        ))}
-      </div>
-    </section>
-
     <section class="section">
-      <p class="section-label">About</p>
-      <div class="about-grid">
-        <p class="about-lede">
-          I sit where product taste meets frontend systems: turning complex
-          workflows into interfaces people can understand, trust, and use at
-          speed.
-        </p>
-        <div>
-          <p class="about-text">
-            I’ve architected reward systems, design systems, and
-            developer-facing tools across decentralized protocols, healthcare,
-            and enterprise platforms.
+      <p class="section-label reveal">About</p>
+      <div class="about-grid reveal">
+        <div class="about-copy">
+          <p class="about-lede">
+            I’m a frontend engineer who works best on product surfaces with real
+            complexity: wallets, rewards, dashboards, content systems, admin tools,
+            and user flows that need to stay reliable in production.
           </p>
           <p class="about-text">
-            I care about performance, accessibility, and shipping things that
-            hold up once real users start leaning on them.
+            Clear interfaces. Maintainable architecture. Fast iteration.
+            Details that make products easier to use.
           </p>
         </div>
-      </div>
-      <div class="skills">
-        {skills.map((s) => <span class="skill-tag">{s}</span>)}
+        <div class="skills">
+          {skillGroups.flatMap((group) => group.items).map((item) => (
+            <span class="skill-tag">{item}</span>
+          ))}
+        </div>
       </div>
     </section>
 
     <ScrambleDecode client:visible />
 
-    <section class="section">
-      <p class="section-label">Connect</p>
+    <section class="section connect-section">
+      <p class="section-label">Contact</p>
       <div class="contact-panel">
         <p>
           Have a product interface, Web3 UX problem, or frontend system that
@@ -204,11 +177,83 @@ import '../index.css';
   </main>
 
   <footer class="footer">
-    <span class="footer-copy">© 2026 Kolade Oyewumi</span>
+    <div class="footer-left">
+      <span class="footer-copy">© 2026 Kolade Oyewumi</span>
+      <a
+        class="footer-spotify"
+        data-spotify-card
+        href="https://open.spotify.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-live="polite"
+        hidden
+      >
+        <span data-spotify-status>Now playing</span>
+        <span data-spotify-track></span>
+        <span data-spotify-artist></span>
+      </a>
+    </div>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
     </div>
   </footer>
+
+  <script is:inline>
+    document.documentElement.classList.add('reveal-ready');
+    const revealTargets = document.querySelectorAll('.reveal, .contact-panel');
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+      );
+
+      revealTargets.forEach((target) => revealObserver.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add('is-visible'));
+    }
+
+    const spotifyCard = document.querySelector('[data-spotify-card]');
+    const spotifyStatus = document.querySelector('[data-spotify-status]');
+    const spotifyTrack = document.querySelector('[data-spotify-track]');
+    const spotifyArtist = document.querySelector('[data-spotify-artist]');
+
+    async function loadSpotifyTrack() {
+      if (!spotifyCard || !spotifyStatus || !spotifyTrack || !spotifyArtist) return;
+
+      try {
+        const response = await fetch('/.netlify/functions/spotify-now-playing');
+
+        if (!response.ok) throw new Error('Spotify request failed');
+
+        const data = await response.json();
+
+        if (!data.isPlaying) {
+          spotifyCard.hidden = true;
+          spotifyCard.removeAttribute('href');
+          return;
+        }
+
+        spotifyCard.hidden = false;
+        spotifyStatus.textContent = 'Listening now';
+        spotifyTrack.textContent = data.title;
+        spotifyArtist.textContent = `— ${data.artist}`;
+        spotifyCard.setAttribute('href', data.url);
+      } catch {
+        spotifyCard.hidden = true;
+        spotifyCard.removeAttribute('href');
+      }
+    }
+
+    loadSpotifyTrack();
+  </script>
 </Layout>

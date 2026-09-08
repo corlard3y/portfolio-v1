@@ -45,11 +45,6 @@ import '../index.css';
     </span>
 
     <nav class="header-nav">
-      <a href="#experience" class="mobile-hidden" data-analytics-event="click_nav" data-analytics-label="experience">Experience</a>
-      <a href="#projects" class="mobile-hidden" data-analytics-event="click_nav" data-analytics-label="projects">Projects</a>
-      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="header">LinkedIn</a>
-      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="header">GitHub</a>
-      <a href="mailto:oyewumi.koladej@gmail.com" class="mobile-hidden" data-analytics-event="click_email" data-analytics-label="header">Email</a>
       <ThemeToggle client:load />
     </nav>
   </header>
@@ -58,7 +53,7 @@ import '../index.css';
     <section class="hero" aria-labelledby="intro-title">
       <p class="hero-kicker">Frontend engineer · shipping globally · Nigeria</p>
       <h1 id="intro-title" class="hero-title">
-        I build interfaces for platforms, products, and teams shipping real software.
+        Kolade Oyewumi builds interfaces for platforms, products, and teams shipping real software.
       </h1>
       <div class="hero-grid">
         <p class="hero-desc">
@@ -173,18 +168,21 @@ import '../index.css';
     <section class="section connect-section">
       <p class="section-label">Contact</p>
       <div class="contact-panel">
-        <p>
-          Have a product interface, Web3 UX problem, or frontend system that
-          needs sharper execution?
-        </p>
-        <a
-          href="mailto:oyewumi.koladej@gmail.com"
-          class="connect-email"
-          data-analytics-event="click_email"
-          data-analytics-label="contact"
-        >
-          oyewumi.koladej@gmail.com →
-        </a>
+        <div class="contact-copy">
+          <p>It’s time to build your next product interface.</p>
+          <p class="contact-support">Let’s work together and ship something useful.</p>
+          <div class="contact-links" aria-label="Contact links">
+            <a
+              href="mailto:oyewumi.koladej@gmail.com"
+              data-analytics-event="click_email"
+              data-analytics-label="contact"
+            >
+              Email
+            </a>
+            <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="contact">LinkedIn</a>
+            <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="contact">GitHub</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -217,12 +215,7 @@ import '../index.css';
   </a>
 
   <footer class="footer">
-    <span class="footer-copy">© 2026 Kolade Oyewumi</span>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="footer">LinkedIn</a>
-      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="footer">GitHub</a>
-      <a href="mailto:oyewumi.koladej@gmail.com" data-analytics-event="click_email" data-analytics-label="footer">Email</a>
-    </div>
+    <span class="footer-copy">Made by Kolade ⚡</span>
   </footer>
 
   <script is:inline>

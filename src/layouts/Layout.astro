@@ -4,9 +4,11 @@ interface Props {
   description?: string;
 }
 const {
-  title = 'Kolade Oyewumi',
-  description = 'Kolade Oyewumi — Full-Stack Software Engineer',
+  title = 'Kolade Oyewumi - Software Engineer',
+  description = `Kolade Oyewumi is a software engineer based in Nigeria, building clean, smooth, interactive interfaces for platforms, products, and teams shipping real software.`,
 } = Astro.props;
+const siteUrl = 'https://kolade.tech';
+const imageUrl = `${siteUrl}/logo512.png`;
 ---
 
 <!doctype html>
@@ -17,9 +19,45 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#11100e" />
     <meta name="description" content={description} />
+    <meta name="author" content="Kolade Oyewumi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
     <link rel="preload" href="/fonts/Satoshi-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="preload" href="/fonts/Satoshi-Medium.otf" as="font" type="font/otf" crossorigin />
     <title>{title}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="Kolade Oyewumi" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Kolade Oyewumi',
+      url: siteUrl,
+      jobTitle: 'Software Engineer',
+      email: 'mailto:oyewumi.koladej@gmail.com',
+      sameAs: [
+        'https://www.linkedin.com/in/kolade-oyewumi-644492195/',
+        'https://github.com/corlard3y',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'NG',
+      },
+      knowsAbout: [
+        'Frontend Engineering',
+        'React',
+        'TypeScript',
+        'Interactive Interfaces',
+        'Product Engineering',
+      ],
+    })}></script>
     <!-- Set theme before paint to avoid flash -->
     <script is:inline>
       const savedTheme = localStorage.getItem('theme');

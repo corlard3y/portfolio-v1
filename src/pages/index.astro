@@ -45,11 +45,11 @@ import '../index.css';
     </span>
 
     <nav class="header-nav">
-      <a href="#experience" class="mobile-hidden">Experience</a>
-      <a href="#projects" class="mobile-hidden">Projects</a>
-      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="mailto:oyewumi.koladej@gmail.com" class="mobile-hidden">Email</a>
+      <a href="#experience" class="mobile-hidden" data-analytics-event="click_nav" data-analytics-label="experience">Experience</a>
+      <a href="#projects" class="mobile-hidden" data-analytics-event="click_nav" data-analytics-label="projects">Projects</a>
+      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="header">LinkedIn</a>
+      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="header">GitHub</a>
+      <a href="mailto:oyewumi.koladej@gmail.com" class="mobile-hidden" data-analytics-event="click_email" data-analytics-label="header">Email</a>
       <ThemeToggle client:load />
     </nav>
   </header>
@@ -85,6 +85,8 @@ import '../index.css';
             rel="noopener noreferrer"
             class="experience-row reveal"
             style={`--reveal-delay: ${index * 55}ms`}
+            data-analytics-event="click_experience"
+            data-analytics-label={w.company}
           >
             <div>
               <p class="experience-company">{w.company}</p>
@@ -126,7 +128,13 @@ import '../index.css';
             </div>
             <div class="project-links">
               {project.links.map((link) => (
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-analytics-event="click_project"
+                  data-analytics-label={`${project.name}: ${link.label}`}
+                >
                   {link.label} ↗
                 </a>
               ))}
@@ -169,7 +177,12 @@ import '../index.css';
           Have a product interface, Web3 UX problem, or frontend system that
           needs sharper execution?
         </p>
-        <a href="mailto:oyewumi.koladej@gmail.com" class="connect-email">
+        <a
+          href="mailto:oyewumi.koladej@gmail.com"
+          class="connect-email"
+          data-analytics-event="click_email"
+          data-analytics-label="contact"
+        >
           oyewumi.koladej@gmail.com →
         </a>
       </div>
@@ -183,6 +196,8 @@ import '../index.css';
     target="_blank"
     rel="noopener noreferrer"
     aria-live="polite"
+    data-analytics-event="click_spotify"
+    data-analytics-label="now_playing_widget"
     hidden
   >
     <span class="spotify-logo" aria-hidden="true">
@@ -204,13 +219,40 @@ import '../index.css';
   <footer class="footer">
     <span class="footer-copy">© 2026 Kolade Oyewumi</span>
     <div class="footer-links">
-      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="mailto:oyewumi.koladej@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="footer">LinkedIn</a>
+      <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="footer">GitHub</a>
+      <a href="mailto:oyewumi.koladej@gmail.com" data-analytics-event="click_email" data-analytics-label="footer">Email</a>
     </div>
   </footer>
 
   <script is:inline>
+    function trackAnalyticsEvent(name, params = {}) {
+      if (typeof window.gtag !== 'function') return;
+
+      window.gtag('event', name, params);
+    }
+
+    trackAnalyticsEvent('page_load', {
+      event_category: 'engagement',
+      page_path: window.location.pathname,
+      page_title: document.title,
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const analyticsTarget = target?.closest('[data-analytics-event]');
+
+      if (!analyticsTarget) return;
+
+      trackAnalyticsEvent(analyticsTarget.dataset.analyticsEvent, {
+        event_category: 'engagement',
+        event_label:
+          analyticsTarget.dataset.analyticsLabel ||
+          analyticsTarget.textContent?.trim().slice(0, 100),
+        link_url: analyticsTarget.href || undefined,
+      });
+    });
+
     document.documentElement.classList.add('reveal-ready');
     const revealTargets = document.querySelectorAll('.reveal, .contact-panel');
 

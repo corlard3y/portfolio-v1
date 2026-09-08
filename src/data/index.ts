@@ -113,30 +113,30 @@ export const featuredProjects = [
     ],
     links: [
       // { label: 'Mobicure', url: 'https://mobicure.biz' },
-      { label: 'myPaddi store', url: 'https://mypaddiapp.com' },
+      { label: 'myPaddi store', url: 'https://studio.mypaddiapp.com' },
     ],
   },
-  {
-    name: 'Datazen HR Platform',
-    category: 'B2B SaaS',
-    role: 'Lead Frontend Contributor',
-    summary:
-      'Led major frontend work on an HR operations platform covering employee records, requests, approvals, credentials, payslips and dashboard workflows.',
-    stack: [
-      'React',
-      'Redux',
-      'Redux Thunk',
-      'Material UI',
-      'Ant Design',
-      'Styled Components',
-    ],
-    links: [
-      {
-        label: 'Source',
-        url: 'https://github.com/mactay-github/Datazen-hr-app',
-      },
-    ],
-  },
+  // {
+  //   name: 'Datazen HR Platform',
+  //   category: 'B2B SaaS',
+  //   role: 'Lead Frontend Contributor',
+  //   summary:
+  //     'Led major frontend work on an HR operations platform covering employee records, requests, approvals, credentials, payslips and dashboard workflows.',
+  //   stack: [
+  //     'React',
+  //     'Redux',
+  //     'Redux Thunk',
+  //     'Material UI',
+  //     'Ant Design',
+  //     'Styled Components',
+  //   ],
+  //   links: [
+  //     {
+  //       label: 'Source',
+  //       url: 'https://github.com/mactay-github/Datazen-hr-app',
+  //     },
+  //   ],
+  // },
 ];
 
 // export const additionalProjects = [

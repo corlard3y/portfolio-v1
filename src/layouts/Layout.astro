@@ -27,6 +27,16 @@ const {
       if (!savedTheme) localStorage.setItem('theme', 'dark');
       document.documentElement.setAttribute('data-theme', t);
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HK7Y4THFG"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1HK7Y4THFG');
+    </script>
   </head>
   <body>
     <slot />

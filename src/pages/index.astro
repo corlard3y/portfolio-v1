@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { ScrambleDecode } from '../components/ScrambleDecode';
-import { ThemeToggle } from '../components/ThemeToggle';
 import {
   featuredProjects,
+  quotes,
   skillGroups,
   work,
 } from '../data';
@@ -45,7 +44,18 @@ import '../index.css';
     </span>
 
     <nav class="header-nav">
-      <ThemeToggle client:load />
+      <button
+        class="theme-toggle"
+        data-theme-toggle
+        data-active-theme="dark"
+        data-analytics-event="toggle_theme"
+        data-analytics-label="switch_to_light"
+        aria-label="Switch to light mode"
+        aria-pressed="true"
+        type="button"
+      >
+        <span class="theme-toggle-knob" aria-hidden="true"></span>
+      </button>
     </nav>
   </header>
 
@@ -163,7 +173,9 @@ import '../index.css';
       </div>
     </section>
 
-    <ScrambleDecode client:visible />
+    <div class="quote-wrap" data-scramble-quote data-quotes={JSON.stringify(quotes)}>
+      <p class="quote-text">“{quotes[0]}”</p>
+    </div>
 
     <section class="section connect-section">
       <p class="section-label">Contact</p>
@@ -231,6 +243,28 @@ import '../index.css';
       page_title: document.title,
     });
 
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+
+    function updateThemeToggle(theme) {
+      if (!themeToggle) return;
+
+      const isDark = theme === 'dark';
+      themeToggle.dataset.activeTheme = theme;
+      themeToggle.dataset.analyticsLabel = isDark ? 'switch_to_light' : 'switch_to_dark';
+      themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+    }
+
+    updateThemeToggle(document.documentElement.getAttribute('data-theme') || 'dark');
+
+    themeToggle?.addEventListener('click', () => {
+      const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+      updateThemeToggle(nextTheme);
+    });
+
     document.addEventListener('click', (event) => {
       const target = event.target instanceof Element ? event.target : null;
       const analyticsTarget = target?.closest('[data-analytics-event]');
@@ -245,6 +279,73 @@ import '../index.css';
         link_url: analyticsTarget.href || undefined,
       });
     });
+
+    const quoteWrap = document.querySelector('[data-scramble-quote]');
+    const quoteText = quoteWrap?.querySelector('.quote-text');
+    const quotes = quoteWrap?.dataset.quotes ? JSON.parse(quoteWrap.dataset.quotes) : [];
+    const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!<>-_\\/[]{}=+*^?#@$';
+    const frameMs = 45;
+    const totalFrames = 40;
+    let quoteIndex = Math.floor(Math.random() * quotes.length);
+    let quoteInterval;
+    let quoteHold;
+
+    function scrambleQuote(target, locked) {
+      return target
+        .split('')
+        .map((char, index) => {
+          if (char === ' ') return char;
+          if (index < locked) return char;
+          return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        })
+        .join('');
+    }
+
+    function showNextQuote() {
+      if (!quoteText || !quotes.length) return;
+
+      const target = quotes[quoteIndex];
+      let frame = 0;
+      quoteText.style.opacity = '1';
+      quoteText.textContent = `“${scrambleQuote(target, 0)}”`;
+
+      quoteInterval = window.setInterval(() => {
+        frame += 1;
+        const locked = Math.floor((frame / totalFrames) * target.length);
+        quoteText.textContent = `“${scrambleQuote(target, locked)}”`;
+
+        if (frame >= totalFrames) {
+          window.clearInterval(quoteInterval);
+          quoteText.textContent = `“${target}”`;
+
+          quoteHold = window.setTimeout(() => {
+            quoteText.style.opacity = '0';
+            window.setTimeout(() => {
+              let nextIndex = quoteIndex;
+              while (nextIndex === quoteIndex && quotes.length > 1) {
+                nextIndex = Math.floor(Math.random() * quotes.length);
+              }
+              quoteIndex = nextIndex;
+              showNextQuote();
+            }, 500);
+          }, 5000 + Math.random() * 5000);
+        }
+      }, frameMs);
+    }
+
+    if (quoteWrap && quoteText && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const quoteObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            quoteObserver.disconnect();
+            showNextQuote();
+          }
+        },
+        { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+      );
+
+      quoteObserver.observe(quoteWrap);
+    }
 
     document.documentElement.classList.add('reveal-ready');
     const revealTargets = document.querySelectorAll('.reveal, .contact-panel');

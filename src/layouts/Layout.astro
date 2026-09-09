@@ -24,6 +24,7 @@ const imageUrl = `${siteUrl}/logo512.png`;
     <link rel="canonical" href={siteUrl} />
     <link rel="preload" href="/fonts/Satoshi-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="preload" href="/fonts/Satoshi-Medium.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="/fonts/Satoshi-Bold.otf" as="font" type="font/otf" crossorigin />
     <title>{title}</title>
     <meta property="og:type" content="website" />
     <meta property="og:url" content={siteUrl} />
@@ -68,13 +69,18 @@ const imageUrl = `${siteUrl}/logo512.png`;
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HK7Y4THFG"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){window.dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-1HK7Y4THFG');
+
+      window.addEventListener('load', () => {
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-1HK7Y4THFG';
+        document.head.appendChild(gaScript);
+      });
     </script>
   </head>
   <body>

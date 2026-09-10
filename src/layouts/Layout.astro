@@ -8,7 +8,7 @@ const {
   description = `Kolade Oyewumi is a software engineer based in Nigeria, building clean, smooth, interactive interfaces for platforms, products, and teams shipping real software.`,
 } = Astro.props;
 const siteUrl = 'https://kolade.tech';
-const imageUrl = `${siteUrl}/logo512.png`;
+const imageUrl = `${siteUrl}/kolade-profile.png`;
 ---
 
 <!doctype html>
@@ -30,11 +30,13 @@ const imageUrl = `${siteUrl}/logo512.png`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content="Kolade Oyewumi, Software Engineer" />
     <meta property="og:site_name" content="Kolade Oyewumi" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content="Kolade Oyewumi, Software Engineer" />
     <meta name="google-site-verification" content="v2mdVS0_S5uOnPwD5KuLMqHZkyJ_bngFp2sp87VMRjc" />
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -58,6 +60,13 @@ const imageUrl = `${siteUrl}/logo512.png`;
         'Interactive Interfaces',
         'Product Engineering',
       ],
+    })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Kolade Oyewumi',
+      alternateName: 'Kolade',
+      url: siteUrl,
     })}></script>
     <!-- Set theme before paint to avoid flash -->
     <script is:inline>

@@ -22,8 +22,7 @@ const imageUrl = `${siteUrl}/logo512.png`;
     <meta name="author" content="Kolade Oyewumi" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={siteUrl} />
-    <link rel="preload" href="/fonts/Satoshi-Regular.otf" as="font" type="font/otf" crossorigin />
-    <link rel="preload" href="/fonts/Satoshi-Medium.otf" as="font" type="font/otf" crossorigin />
+    <!-- The hero uses the bold face; defer the other weights until they are needed. -->
     <link rel="preload" href="/fonts/Satoshi-Bold.otf" as="font" type="font/otf" crossorigin />
     <title>{title}</title>
     <meta property="og:type" content="website" />

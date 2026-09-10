@@ -385,7 +385,6 @@ import '../index.css';
 
         if (!data.isPlaying) {
           spotifyCard.hidden = true;
-          spotifyCard.removeAttribute('href');
           return;
         }
 
@@ -396,12 +395,13 @@ import '../index.css';
         spotifyCard.setAttribute('href', data.url);
       } catch {
         spotifyCard.hidden = true;
-        spotifyCard.removeAttribute('href');
       }
     }
 
-    loadSpotifyTrack();
-    window.setInterval(loadSpotifyTrack, 10000);
+    window.addEventListener('load', () => {
+      loadSpotifyTrack();
+      window.setInterval(loadSpotifyTrack, 10000);
+    }, { once: true });
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) loadSpotifyTrack();

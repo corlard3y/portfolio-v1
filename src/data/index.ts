@@ -33,9 +33,9 @@ export const featuredProjects = [
   {
     name: 'Push dApp',
     category: 'Web3 / Communication / Production App',
-    role: 'Core Frontend / Product Engineer',
+    role: 'Frontend Engineer',
     summary:
-      'Built and maintained core frontend surfaces across Push’s production dApp, including notifications, channels, chat, spaces, rewards, wallet flows and integrations and its blocks design system',
+      'Built and maintained core frontend surfaces across Push’s production dApp, including notifications, channels, chat, wallet flows and integrations and its components design system',
     stack: [
       'React',
       'TypeScript',
@@ -56,7 +56,7 @@ export const featuredProjects = [
   },
   {
     name: 'Push Rewards',
-    category: 'Web3 Rewards',
+    category: 'Web3 ',
     role: 'Core Frontend Engineer',
     summary:
       'Built wallet-connected quest, reward, campaign, migration and activity interfaces for Push Chain’s user portal.',

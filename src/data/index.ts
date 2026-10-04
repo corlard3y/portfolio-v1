@@ -176,24 +176,43 @@ export const featuredProjects = [
 
 export const skillGroups = [
   {
-    label: 'Frontend',
-    items: ['React', 'Next.js', 'TypeScript', 'Vite'],
+    label: 'Languages',
+    items: ['JavaScript', 'TypeScript'],
   },
   {
-    label: 'State & data',
-    items: ['Redux Toolkit', 'TanStack Query', 'REST APIs'],
+    label: 'Frameworks/Libraries',
+    items: [
+      'React',
+      'React Native',
+      'Next.js',
+      'Vue.js',
+      'Node.js',
+      'NestJS',
+      'TanStack Query',
+      'Redux',
+      'Styled Components',
+      'Tailwind CSS',
+      'Material UI',
+      'Ant Design',
+      'Shadcn/ui',
+      'Pinia',
+    ],
+  },
+  {
+    label: 'Database',
+    items: ['PostgreSQL', 'MySQL'],
+  },
+  {
+    label: 'Tools',
+    items: ['Git', 'GitHub', 'Docker', 'AWS', 'GitHub Actions', 'CI/CD', 'Vercel', 'Netlify'],
   },
   {
     label: 'Web3',
-    items: ['Ethers.js', 'WalletConnect', 'Push SDK'],
+    items: ['ethers.js', 'Web3.js'],
   },
   {
-    label: 'UI systems',
-    items: ['Tailwind', 'Shadcn' ,'Styled Components', 'Ant Design', 'Material UI'],
-  },
-  {
-    label: 'Product quality',
-    items: ['SEO', 'Performance', 'Responsive UI', 'Accessibility'],
+    label: 'AI & LLMs',
+    items: ['LLM Integration', 'Prompt Engineering', 'AI Workflow Automation'],
   },
 ];
 

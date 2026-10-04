@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SkillIcon } from '../components/SkillIcon';
+import { skillGroups } from '../data';
+import '../styles/skills-preview.css';
+---
+
+<Layout title="Skills Layout Preview - Kolade Oyewumi">
+  <main class="skills-preview">
+    <header class="skills-preview-header">
+      <p class="skills-preview-kicker">Temporary design preview</p>
+      <h1>Choose a direction for the skills section.</h1>
+      <p>These three versions use the same technologies and logos. The main portfolio remains unchanged.</p>
+    </header>
+
+    <section class="preview-option preview-wall" aria-labelledby="logo-wall-title">
+      <div class="preview-heading">
+        <span>01</span>
+        <div>
+          <p class="preview-kicker">Visual system</p>
+          <h2 id="logo-wall-title">Logo wall</h2>
+          <p>Grouped logo tiles with a flexible grid.</p>
+        </div>
+      </div>
+
+      <div class="wall-groups">
+        {skillGroups.map((group) => (
+          <div class="wall-group">
+            <p class="wall-label">{group.label}</p>
+            <div class="wall-items">
+              {group.items.map((item) => (
+                <span class="wall-item">
+                  <SkillIcon name={item} />
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="preview-option preview-marquee" aria-labelledby="logo-marquee-title">
+      <div class="preview-heading">
+        <span>02</span>
+        <div>
+          <p class="preview-kicker">Motion system</p>
+          <h2 id="logo-marquee-title">Logo marquee</h2>
+          <p>Animated category strips with repeating logo sequences.</p>
+        </div>
+      </div>
+
+      <div class="marquee-groups">
+        {skillGroups.map((group, groupIndex) => (
+          <div class="marquee-group">
+            <p class="marquee-label">{group.label}</p>
+            <div class="marquee-window">
+              <div class:list={['marquee-track', { 'marquee-track-reverse': groupIndex % 2 === 1 }]}>
+                {[...group.items, ...group.items].map((item) => (
+                  <span class="marquee-item">
+                    <SkillIcon name={item} />
+                    <span>{item}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="preview-option preview-rows" aria-labelledby="editorial-rows-title">
+      <div class="preview-heading">
+        <span>03</span>
+        <div>
+          <p class="preview-kicker">Editorial system</p>
+          <h2 id="editorial-rows-title">Editorial rows</h2>
+          <p>Full-width category rows that match the Experience section.</p>
+        </div>
+      </div>
+
+      <div class="editorial-groups">
+        {skillGroups.map((group) => (
+          <div class="editorial-group">
+            <p class="editorial-label">{group.label}</p>
+            <div class="editorial-items">
+              {group.items.map((item) => (
+                <span class="editorial-item">
+                  <SkillIcon name={item} />
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

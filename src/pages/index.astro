@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SkillIcon } from '../components/SkillIcon';
 import {
   featuredProjects,
   quotes,
@@ -16,21 +17,21 @@ import '../index.css';
     <div class="ticker-track">
       <div class="ticker-group">
         <span>Available for work</span>
-        <span>Frontend Engineer</span>
+        <span>Software Engineer</span>
         <span>Based in Nigeria</span>
         <span>Open to remote teams</span>
         <span>Product Engineer</span>
       </div>
       <div class="ticker-group" aria-hidden="true">
         <span>Available for work</span>
-        <span>Frontend Engineer</span>
+        <span>Software Engineer</span>
         <span>Based in Nigeria</span>
         <span>Open to remote teams</span>
         <span>Product Engineer</span>
       </div>
       <div class="ticker-group" aria-hidden="true">
         <span>Available for work</span>
-        <span>Frontend Engineer</span>
+        <span>Software Engineer</span>
         <span>Based in Nigeria</span>
         <span>Open to remote teams</span>
         <span>Product Engineer</span>
@@ -61,15 +62,15 @@ import '../index.css';
 
   <main class="main">
     <section class="hero" aria-labelledby="intro-title">
-      <p class="hero-kicker">Frontend engineer · shipping globally · Nigeria</p>
+      <p class="hero-kicker">Software engineer · shipping globally · Nigeria</p>
       <h1 id="intro-title" class="hero-title">
-        I build interfaces for platforms, products, and teams shipping real software.
+        I build software for platforms, products, and teams shipping globally.
       </h1>
       <div class="hero-grid">
         <p class="hero-desc">
-          Frontend engineer building production interfaces across Web3,
-          developer platforms, health-tech, business operations software, and
-          commercial websites.
+          Software engineer building production systems across Web3, developer
+          platforms, health-tech, business operations software, and commercial
+          websites.
         </p>
         <div class="hero-proof" aria-label="Selected highlights">
           <span>7+ years experience</span>
@@ -156,18 +157,30 @@ import '../index.css';
       <div class="about-grid reveal">
         <div class="about-copy">
           <p class="about-lede">
-            I build frontend systems for production products: dApps, dashboards,
-            documentation sites, admin tools, and business websites.
+            I build production software across dApps, dashboards, developer
+            platforms, admin tools, and business websites.
           </p>
           <p class="about-text">
-            My work is mostly React and TypeScript. I focus on clean UI,
-            predictable state, responsive layouts, API integration, and features
-            that stay maintainable after launch.
+            I work across React, TypeScript, Node.js, and NestJS. I focus on
+            clear architecture, reliable APIs, maintainable interfaces, and
+            features that stay useful after launch.
           </p>
         </div>
-        <div class="skills">
-          {skillGroups.flatMap((group) => group.items).map((item) => (
-            <span class="skill-tag">{item}</span>
+        <div class="skills skills-marquee">
+          {skillGroups.map((group) => (
+            <div class="skill-group skill-marquee-group">
+              <p class="skill-group-label">{group.label}</p>
+              <div class="skill-marquee-window">
+                <div class="skill-marquee-track">
+                  {group.items.map((item) => (
+                    <span class="skill-marquee-item">
+                      <SkillIcon name={item} />
+                      <span>{item}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -198,7 +211,7 @@ import '../index.css';
               Email
             </a>
             <a
-              href="https://drive.google.com/file/d/1DSXK2tOojBvIYNVfmSdiLjr_7_7x9QrY/view?usp=sharing"
+              href="https://drive.google.com/file/d/15xcmbBfnLZ-cRBIhT1NX1a_Sg3dJjtdv/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               data-analytics-event="click_resume"

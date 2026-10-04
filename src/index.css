@@ -655,13 +655,6 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   min-height: 1.9rem;
-  border: 1px solid var(--soft-border);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
-  color: var(--text);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1;
 }
 
 .about-grid {
@@ -694,26 +687,72 @@ button:focus-visible {
 
 .skills {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+  flex-direction: column;
   max-width: none;
 }
 
-.skill-tag {
-  min-height: 1.75rem;
-  padding: 0 0.6rem;
-  color: var(--muted);
-  border: 1px solid var(--soft-border);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
-  font-size: 0.74rem;
-  font-weight: 700;
-  transition: background 0.15s ease, color 0.15s ease;
+.skill-group {
+  min-width: 0;
 }
 
-.skill-tag:hover {
-  background: var(--text);
-  color: var(--bg);
+.skill-marquee-group {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--soft-border);
+}
+
+.skill-group-label {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skill-marquee-window {
+  overflow: visible;
+}
+
+.skill-marquee-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.skill-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.skill-icon {
+  flex: 0 0 auto;
+  width: 1.45rem;
+  height: 1.45rem;
+  color: var(--accent);
+  font-size: 0.68rem;
+}
+
+.skill-icon-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 0.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.skill-marquee-item:hover {
+  color: var(--accent);
 }
 
 .quote-wrap {
@@ -976,6 +1015,7 @@ button:focus-visible {
     opacity: 1;
     transform: none;
   }
+
 }
 
 @media (max-width: 900px) {
@@ -1202,13 +1242,22 @@ button:focus-visible {
   }
 
   .skills {
-    gap: 0.38rem;
+    gap: 0;
   }
 
-  .skill-tag,
+  .skill-marquee-group {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    padding: 1.1rem 0;
+  }
+
+  .skill-marquee-item {
+    font-size: 0.8rem;
+  }
+
   .project-stack span {
     min-height: 1.65rem;
-    padding: 0 0.52rem;
+    padding: 0.42rem 0.52rem;
     font-size: 0.68rem;
   }
 

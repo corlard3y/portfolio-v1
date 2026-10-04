@@ -316,7 +316,7 @@ button:focus-visible {
 .main {
   width: min(100%, 1180px);
   margin: 0 auto;
-  padding: 4rem 1.25rem 8rem;
+  padding: 4rem 1.25rem 0;
 }
 
 .hero {
@@ -397,7 +397,7 @@ button:focus-visible {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 7rem 0;
   border-bottom: 1px solid var(--soft-border);
 }
 
@@ -406,7 +406,7 @@ button:focus-visible {
 }
 
 .projects-section {
-  padding-bottom: 5rem;
+  padding-bottom: 7rem;
 }
 
 .project-grid {
@@ -750,39 +750,52 @@ button:focus-visible {
 }
 
 .connect-section {
-  padding-top: 6rem;
+  padding-top: 120px;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .contact-copy {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.6rem;
 }
 
 .contact-panel p {
-  max-width: 860px;
-  font-size: clamp(2.4rem, 6.6vw, 7.2rem);
+  text-align: center;
+  font-size: clamp(1.1rem, 6.6vw, 3.6rem);
   font-weight: 700;
   line-height: 0.88;
   letter-spacing: -0.085em;
 }
 
-.contact-panel .contact-support {
-  max-width: 520px;
-  color: var(--muted);
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+.contact-email {
+  color: var(--text);
+  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
   font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: 0;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18rem;
+  transition: color 0.18s ease;
+}
+
+.contact-email:hover,
+.contact-email:focus-visible {
+  color: var(--accent);
 }
 
 .contact-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.85rem 1.4rem;
-  margin-top: 0.75rem;
+  justify-content: space-between;
+  width: calc(100% + 2.5rem);
+  margin-left: -1.25rem;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+  margin-top: 12.75rem;
 }
 
 .contact-links a {
@@ -791,11 +804,13 @@ button:focus-visible {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--muted);
+  color: var(--text);
   font-size: clamp(1.45rem, 2.9vw, 2.75rem);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.055em;
+  text-transform: uppercase;
+  white-space: nowrap;
   transition: color 0.18s ease, transform 0.18s ease;
 }
 
@@ -1063,7 +1078,7 @@ button:focus-visible {
   }
 
   .main {
-    padding: 2.35rem 1rem 4.5rem;
+    padding: 2.35rem 1rem 0;
   }
 
   .hero {
@@ -1113,11 +1128,11 @@ button:focus-visible {
   }
 
   .section {
-    padding: 3.5rem 0;
+    padding: 5rem 0;
   }
 
   .connect-section {
-    padding-top: 4rem;
+    padding-top: 120px;
   }
 
   .project-card,
@@ -1216,12 +1231,14 @@ button:focus-visible {
   }
 
   .contact-links a {
-    font-size: clamp(1.35rem, 8vw, 2.2rem);
+    font-size: clamp(0.72rem, 4.8vw, 2.2rem);
   }
 
   .contact-links {
     margin-top: 0.4rem;
-    margin-left: 0;
+    margin-left: -1rem;
+    width: calc(100% + 2rem);
+    padding: 0 1rem;
   }
 
   .spotify-widget {

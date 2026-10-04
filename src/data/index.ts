@@ -4,7 +4,7 @@ export const work = [
     role: 'Frontend Engineer',
     period: '2022–Present',
     url: 'https://push.org',
-    eyebrow: 'Web3 product',
+    eyebrow: 'Web3',
   },
   {
     company: 'Mobicure',
@@ -21,7 +21,7 @@ export const work = [
     eyebrow: 'Enterprise software',
   },
   {
-    company: 'Bowen University Digital Services',
+    company: 'Bowen University Digital Service',
     role: 'Software Developer Intern',
     period: '2020',
     url: 'https://bowen.edu.ng/',

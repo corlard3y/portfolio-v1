@@ -178,11 +178,17 @@ import '../index.css';
     </div>
 
     <section class="section connect-section">
-      <p class="section-label">Contact</p>
       <div class="contact-panel">
         <div class="contact-copy">
-          <p>It’s time to build your next product interface.</p>
-          <p class="contact-support">Let’s work together and ship something useful.</p>
+          <p>Let’s work together.</p>
+          <a
+            class="contact-email"
+            href="mailto:oyewumi.koladej@gmail.com"
+            data-analytics-event="click_email"
+            data-analytics-label="contact_email"
+          >
+            Contact
+          </a>
           <div class="contact-links" aria-label="Contact links">
             <a
               href="mailto:oyewumi.koladej@gmail.com"
@@ -190,6 +196,15 @@ import '../index.css';
               data-analytics-label="contact"
             >
               Email
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1DSXK2tOojBvIYNVfmSdiLjr_7_7x9QrY/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="click_resume"
+              data-analytics-label="contact"
+            >
+              Resume
             </a>
             <a href="https://www.linkedin.com/in/kolade-oyewumi-644492195/" target="_blank" rel="noopener noreferrer" data-analytics-event="click_linkedin" data-analytics-label="contact">LinkedIn</a>
             <a href="https://github.com/corlard3y" target="_blank" rel="noopener noreferrer" data-analytics-event="click_github" data-analytics-label="contact">GitHub</a>
@@ -225,10 +240,6 @@ import '../index.css';
     </span>
     <span class="spotify-widget-action">listen here</span>
   </a>
-
-  <footer class="footer">
-    <span class="footer-copy">Made by Kolade ⚡</span>
-  </footer>
 
   <script is:inline>
     function trackAnalyticsEvent(name, params = {}) {

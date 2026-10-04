@@ -100,7 +100,7 @@ export const featuredProjects = [
   {
     name: 'myPaddi Admin and Analytics',
     category: 'Digital Health',
-    role: 'Frontend Engineer',
+    role: 'Fullstack Engineer',
     summary:
       'Built admin and analytics workflows for myPaddi, supporting user management, subscriptions, coupons, content operations and health-product activity.',
     stack: [
